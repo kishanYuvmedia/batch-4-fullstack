@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "sqlproj: Build Data Source=windows19.hostingraja.org;Initial Catalog=localgri_metroPackers;User ID=localgri_metroPackers;Password=fq_8bc9mYjdk7tV5T",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"/Users/kishangopal/python/Data Source=windows19.hostingraja.org;Initial Catalog=localgri_metroPackers;User ID=localgri_metroPackers;Password=fq_8bc9mYjdk7tV5T/Data Source=windows19.hostingraja.org;Initial Catalog=localgri_metroPackers;User ID=localgri_metroPackers;Password=fq_8bc9mYjdk7tV5T.sqlproj"
+			],
+			"problemMatcher": "$sqlproj-problem-matcher",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Builds the Data Source=windows19.hostingraja.org;Initial Catalog=localgri_metroPackers;User ID=localgri_metroPackers;Password=fq_8bc9mYjdk7tV5T SQL project"
+		}
+	]
+}
