@@ -1,42 +1,214 @@
-<html>
-    <head></head>
-    <style>
-        .box{
-            height: 300px;
-            width: 300px;
-            background-color: red;
-            padding: 10px;
-            padding-left: 50px;
-            margin: 20px;
-            border: 1px solid white;
-        }
-        .main{
-            width: 300px;
-            background-color: rgb(76, 12, 12);
-        }
-        .heading{
-            background-color: red;
-            color: white !important;
-        }
-        .fontstyle{
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 30px;
-            color:black
-        }
-    </style>
-    <body>
-        <div class="main">
-        <div class="box">
-            <p>Learn from over 700 examples! With our editor, you can edit the CSS, and click on a button to view the result.</p>
-                  <p>Learn from over 700 examples! With our editor, you can edit the CSS, and click on a button to view the result.</p>
-      
-                        <p>Learn from over 700 examples! With our editor, you can edit the CSS, and click on a button to view the result.</p>
-            <p>Learn from over 700 examples! With our editor, you can edit the CSS, and click on a button to view the result.</p>
-            <p>Learn from over 700 examples! With our editor, you can edit the CSS, and click on a button to view the result.</p>
-      
-        </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Google Maps Polygon Image Overlay</title>
 
-        <h1 class="heading fontstyle">Ajmer</h1>
-    </body>
+<style>
+html,
+body,
+#map{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+.overlay{
+    position:absolute;
+    pointer-events:none;
+    overflow:visible;
+}
+
+svg{
+    overflow:visible;
+}
+</style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script>
+
+const polygonCoords = [
+
+    {lat:26.4509,lng:74.6392},
+    {lat:26.4518,lng:74.6415},
+    {lat:26.4500,lng:74.6432},
+    {lat:26.4483,lng:74.6418},
+    {lat:26.4488,lng:74.6390}
+
+];
+
+let map;
+
+function initMap(){
+
+    map = new google.maps.Map(document.getElementById("map"),{
+
+        center:{
+            lat:26.4502,
+            lng:74.6410
+        },
+
+        zoom:17,
+
+        mapTypeId:"satellite"
+
+    });
+
+    new google.maps.Polygon({
+
+        paths:polygonCoords,
+
+        strokeColor:"#ff0000",
+
+        strokeWeight:2,
+
+        fillOpacity:0,
+
+        map:map
+
+    });
+
+    new PolygonImageOverlay(
+        polygonCoords,
+        "your-image.jpg",
+        map
+    );
+
+}
+
+
+class PolygonImageOverlay extends google.maps.OverlayView{
+
+    constructor(points,image,map){
+
+        super();
+
+        this.points=points;
+        this.image=image;
+
+        this.setMap(map);
+
+    }
+
+    onAdd(){
+
+        this.div=document.createElement("div");
+        this.div.className="overlay";
+
+        this.svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+
+        this.clipPath=document.createElementNS("http://www.w3.org/2000/svg","clipPath");
+
+        this.clipPath.setAttribute("id","clip");
+
+        this.polygon=document.createElementNS("http://www.w3.org/2000/svg","polygon");
+
+        this.clipPath.appendChild(this.polygon);
+
+        this.defs=document.createElementNS("http://www.w3.org/2000/svg","defs");
+
+        this.defs.appendChild(this.clipPath);
+
+        this.imageElement=document.createElementNS("http://www.w3.org/2000/svg","image");
+
+        this.imageElement.setAttributeNS(
+            "http://www.w3.org/1999/xlink",
+            "href",
+            this.image
+        );
+
+        this.imageElement.setAttribute("clip-path","url(#clip)");
+
+        this.svg.appendChild(this.defs);
+        this.svg.appendChild(this.imageElement);
+
+        this.div.appendChild(this.svg);
+
+        this.getPanes().overlayLayer.appendChild(this.div);
+
+    }
+
+    draw(){
+
+        const projection=this.getProjection();
+
+        let pixels=[];
+
+        let minX=999999;
+        let minY=999999;
+
+        let maxX=-999999;
+        let maxY=-999999;
+
+        this.points.forEach(p=>{
+
+            const point=projection.fromLatLngToDivPixel(
+                new google.maps.LatLng(p.lat,p.lng)
+            );
+
+            pixels.push(point);
+
+            minX=Math.min(minX,point.x);
+            minY=Math.min(minY,point.y);
+
+            maxX=Math.max(maxX,point.x);
+            maxY=Math.max(maxY,point.y);
+
+        });
+
+        const width=maxX-minX;
+        const height=maxY-minY;
+
+        this.div.style.left=minX+"px";
+        this.div.style.top=minY+"px";
+        this.div.style.width=width+"px";
+        this.div.style.height=height+"px";
+
+        this.svg.setAttribute("width",width);
+        this.svg.setAttribute("height",height);
+        this.svg.setAttribute("viewBox","0 0 "+width+" "+height);
+
+        let pts="";
+
+        pixels.forEach(p=>{
+
+            pts+=(p.x-minX)+","+(p.y-minY)+" ";
+
+        });
+
+        this.polygon.setAttribute("points",pts);
+
+        this.imageElement.setAttribute("x",0);
+        this.imageElement.setAttribute("y",0);
+        this.imageElement.setAttribute("width",width);
+        this.imageElement.setAttribute("height",height);
+
+    }
+
+    onRemove(){
+
+        if(this.div){
+
+            this.div.remove();
+
+            this.div=null;
+
+        }
+
+    }
+
+}
+
+</script>
+
+<script async
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmOHihLGvDCeW1Z-UpdnycFu4NcMMW_Ek&callback=initMap">
+</script>
+
+</body>
 </html>

@@ -1,0 +1,57 @@
+<html>
+    <title></title>
+    <head>
+        <style>
+            .main{
+                background-color: aliceblue;
+                width: 100%;
+                padding: 10px;
+                display: grid;
+                grid-template-columns: 24%  24%  24%  24%;
+                gap: 10px;
+                
+            }
+            .image-box{
+                background-color: red;
+                height:300px;
+            }
+            .image-box img{
+                width: 100%;
+                height: 300px;
+                object-fit: fill;
+            }
+            .bg-box{
+                width: 100%;
+                height: 800px;
+                background-color: black;
+                background-image: url('./bg.webp');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div class="image-box">
+                <img src="./istockphoto-517188688-612x612.jpg" alt="">
+            </div>
+            <div class="image-box">
+                <img src="./bg.webp" alt="">
+            </div>
+            <div class="image-box"></div>
+            <div class="image-box"></div>
+            <div class="image-box"></div>
+            <div class="image-box"></div>
+            <div class="image-box"></div>
+            <div class="image-box"></div>
+            <div class="image-box"></div>
+            <div class="image-box"></div>
+        </div>
+
+        <div class="bg-box">
+
+        </div>
+    </body>
+</html>
