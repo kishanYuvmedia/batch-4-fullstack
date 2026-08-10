@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <style>
+            .box{
+                background-color: red;
+                width: 100%;
+                height: 400px;
+            }
+            .box-mobile{
+                background-color: blue;
+                width: 100%;
+                height: 400px;
+                display: none;
+            }
+            .box-tablet{
+                background-color:green;
+                width: 100%;
+                height: 400px;
+                display: none;
+            }
+            @media (max-width:550px) {
+                .box{
+                    display: none;
+                }
+                .box-mobile{
+                    display: block;
+                }
+                .box-tablet{
+                    display: none;
+                }
+            }
+             @media (min-width:750px) {
+                .box{
+                    display: none;
+                }
+                .box-mobile{
+                    display: none;
+                }
+                .box-tablet{
+                    display: block;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+
+        </div>
+         <div class="box-mobile">
+
+        </div>
+         <div class="box-tablet">
+
+        </div>
+    </body>
+</html>
