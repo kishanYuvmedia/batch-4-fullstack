@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sum(a, b) {
+            console.log("hello Ajmer")
+        }
+        sum()
+        const sumview = (a, b) => {
+            return 10;
+        }
+        let v = sumview()
+        console.log(v)
+        let city = ['Ajmer', 'Jaipur', 'Udaipur', 'Kota',"Jodhpur"]
+        console.log(city[0])
+        let json = {
+            name: 'Rajesh',
+            age: 24,
+            city: 'Ajmer',
+            hobbies: ['Music', 'Dance', "Read Book"],
+            shippingAddress: {
+                OfficeAddress: {
+                    currentAddress: "Vaishali Nagar Ajmer",
+                    pin: "302003",
+                    city: 'Ajmer',
+                    ladmark: 'shiv temple',
+                    state: 'Rajasthan'
+                }
+            }
+        }
+        console.log(json.name, json.age)
+        console.log(json.hobbies.toString())
+
+        city.slice(0,2).forEach((c,index,cityAll)=>{
+            console.log("foreach",c,index,cityAll)
+        })
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>c

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <form id="formData1">
+        <input type="text" placeholder="Enter your Name" class="text" name="name" id="name">
+        <input type="text" placeholder="Enter Mobile Number" class="text" name="mobileNumber" id="mobileNumber">
+        <input type="text" placeholder="Enter your City" class="text" name="city" id="city">
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        const formv=document.getElementById('formData1')
+        formv.addEventListener('submit',function(event){
+            event.preventDefault()
+            const formNew=new FormData(formv)
+            // console.log(formNew)
+            const name=formNew.get('name')
+            const mobileNumber=formNew.get('mobileNumber')
+            const city=formNew.get('city')
+            console.log(name,mobileNumber,city)
+        })
+    </script>
+</body>
+</html>
