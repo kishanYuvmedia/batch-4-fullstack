@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+//         String
+// Number
+// BigInt
+// Boolean
+// Undefined
+// Null
+// Symbol
+// Object
+        // const name=null
+        //console.log(name)
+
+        // const city=[100,'Jaipur',true,{name:'Rajesh'}] single Array
+        // const city=[['Ajmer','Raj',305001],['Ajmer','Raj',305001]] 2d array
+        // const city=[['Ajmer','Raj',[100,2002,222]],['Ajmer','Raj',[100,2002,222]]]
+        const name=['Rajesh','Mukesh','Ravi','Mohit','Aakash','Ramesh']
+
+        name.forEach((value,index,fullArrat) => {
+                console.log(index,value)
+        });
+
+        name.map((value,index,fullArrat) => {
+                console.log(index,value)
+        });
+        const student=[{name:'Rajesh',age:20,city:'Ajmer'},{name:'Mukesh',age:39,city:'Jaipur'},{name:'Ravi',age:34,city:'Ajmer'}]
+        console.log(student.filter(data=>data.city=='Ajmer'))
+        console.log(student.find(data=>data.city=='Ajmer'))
+        console.log(student.findIndex(data=>data.city=='Jaipur'))
+
+        const number=[41,31,41,41,34,45]
+        console.log(number.some(data=>data<0))
+        console.log(number.every(data=>data>30))
+        const total=number.reduce((sum,num)=>{
+                return sum=sum+num;
+        })
+
+
+        console.log(total)
+
+        console.log(number.includes(42))
+        name.sort()
+        console.log(name)
+        number.sort((a,b)=>b-a)
+        console.log(number)
+        // number.slice(0,3)
+        console.log( number.slice(0,4))
+        name.splice(0,1,"Kishan")
+        console.log(name)
+        
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
